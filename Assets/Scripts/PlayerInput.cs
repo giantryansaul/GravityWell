@@ -9,9 +9,10 @@ public class PlayerInput : MonoBehaviour {
 	public float turnSpeed = 2.0f;
     public string turnControlAxis = "Horizontal";
     public string throttleControlAxis = "Vertical";
+    public string fireWaveAxis = "Fire1";
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		_playerController = GetComponent<Rigidbody2D> ();
 	}
 	
@@ -23,6 +24,13 @@ public class PlayerInput : MonoBehaviour {
         if (axis != 0) {
 			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity * axis));
 		}
+
+        if(Input.GetAxisRaw(fireWaveAxis) != 0)
+        {
+            GravityWave gw = _playerController.gameObject.AddComponent<GravityWave>();
+            gw.playerSource = _playerController;
+  
+        }
 
 	}
 
