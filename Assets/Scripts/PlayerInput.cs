@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour {
     void Start () {
 		_playerController = GetComponent<Rigidbody2D> ();
         GetComponent<PlayerData>().giveInitialVelocity();
+		_playerController.GetComponent<ParticleSystem> ().enableEmission = false;
 	}
 	
 	// Update is called once per frame
@@ -24,6 +25,8 @@ public class PlayerInput : MonoBehaviour {
 
         if (axis != 0) {
 			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity * axis));
+			_playerController.GetComponent<ParticleSystem> ().enableEmission = true;
+
 		}
 
         if(Input.GetAxisRaw(fireWaveAxis) != 0)
