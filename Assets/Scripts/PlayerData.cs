@@ -33,8 +33,14 @@ public class PlayerData : MonoBehaviour {
             transform.position = defaultSpawn;
             player.velocity = Vector3.zero;
             player.angularVelocity = 0;
+            giveInitialVelocity();
             Debug.Log(player.name + " lives remaining: " + numLivesRemaining);
         }
+    }
+
+    public void giveInitialVelocity()
+    {
+        GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, 1) * 200);
     }
 
     public bool playerIsAlive()

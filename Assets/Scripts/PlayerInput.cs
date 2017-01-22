@@ -6,7 +6,7 @@ public class PlayerInput : MonoBehaviour {
 
 	private Rigidbody2D _playerController;
 	public float thrustVelocity = 5.0f;
-	public float turnSpeed = 2.0f;
+	public float turnSpeed = 3.0f;
     public string turnControlAxis = "Horizontal";
     public string throttleControlAxis = "Vertical";
     public string fireWaveAxis = "Fire1";
@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		_playerController = GetComponent<Rigidbody2D> ();
+        GetComponent<PlayerData>().giveInitialVelocity();
 	}
 	
 	// Update is called once per frame
