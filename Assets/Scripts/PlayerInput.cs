@@ -22,5 +22,14 @@ public class PlayerInput : MonoBehaviour {
 		if (Input.GetAxisRaw (throttleControlAxis) > 0) {
 			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity));
 		}
+
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "GravityWell")
+        {
+            Debug.Log("COLLISION");
+        }
+    }
 }
