@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour {
 
 	private Rigidbody2D _playerController;
-	private ParticleSystem _playerEngine;
+	private ParticleSystem playerEngine;
 	public float thrustVelocity = 5.0f;
 	public float turnSpeed = 3.0f;
     public string turnControlAxis = "Horizontal";
@@ -16,26 +16,29 @@ public class PlayerInput : MonoBehaviour {
     void Start () {
 		_playerController = GetComponent<Rigidbody2D> ();
         GetComponent<PlayerData>().giveInitialVelocity();
-		_playerController.GetComponent<ParticleSystem> ().enableEmission = false;
+
 	}
 
 	void Awake() {
-		_playerEngine = GetComponentInChildren<ParticleSystem>();
-		_playerEngine.gameObject.SetActive (true);
-		_playerEngine.enableEmission = false;
+		playerEngine = GetComponentInChildren<ParticleSystem>();
+		playerEngine.gameObject.SetActive (true);
+		var eng = playerEngine.emission;
+		eng.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		var eng = playerEngine.emission;
+
 		transform.Rotate (0, 0, -getTurnAxis() * turnSpeed);
         float axis = Input.GetAxisRaw(throttleControlAxis);
 
 		if (axis != 0) {
 			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity * axis));
-			_playerEngine.enableEmission = true;
+			eng.enabled = true;
 
 		} else {
-			_playerEngine.enableEmission = false;
+			eng.enabled = false;
 		}
 
         if(Input.GetAxisRaw(fireWaveAxis) != 0)
