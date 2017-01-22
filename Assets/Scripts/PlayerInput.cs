@@ -17,19 +17,26 @@ public class PlayerInput : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.Rotate (0, 0, - Input.GetAxis (turnControlAxis) * turnSpeed);
+		transform.Rotate (0, 0, -getTurnAxis() * turnSpeed);
+        float axis = Input.GetAxisRaw(throttleControlAxis);
 
-		if (Input.GetAxisRaw (throttleControlAxis) > 0) {
-			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity));
+        if (axis != 0) {
+			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity * axis));
 		}
 
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public float getTurnAxis()
     {
-        if (collision.gameObject.tag == "GravityWell")
+        return Input.GetAxis(turnControlAxis);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "GravityWell")
         {
             Debug.Log("COLLISION");
+            GetComponent<PlayerData>().respawnShip();
         }
     }
 }
