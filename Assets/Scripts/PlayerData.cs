@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour {
+
+    public Text livesText;
 
     public Vector2 defaultSpawn = new Vector2(-5, 0);
  
@@ -14,6 +17,9 @@ public class PlayerData : MonoBehaviour {
 	void Start () {
         numLivesRemaining = GameManager.instance.numLivesPerGame;
         player = GetComponent<Rigidbody2D>();
+
+        livesText = GetComponent<Text>();
+        livesText.text = numLivesRemaining;
 	}
 	
 	// Update is called once per frame
