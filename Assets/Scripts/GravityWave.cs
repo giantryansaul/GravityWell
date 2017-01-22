@@ -10,14 +10,20 @@ public class GravityWave : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("New wave.wav");
         GameObject gravityWaveObjPrefab = (GameObject) Resources.Load("GravityWaveObject");
-        gravityWaveObj = Instantiate(gravityWaveObjPrefab, playerSource.position, Quaternion.identity);
-       
+        gravityWaveObj = Instantiate(gravityWaveObjPrefab, playerSource.position, Quaternion.identity, playerSource.transform);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (gravityWaveObj != null)
+        {
+            ParticleSystem ps = gravityWaveObj.GetComponent<ParticleSystem>();
+            if(ps != null && !ps.IsAlive())
+            {
+                Destroy(gravityWaveObj);
+            }
+        }
 	}
+
 }
