@@ -5,10 +5,14 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour {
 
     public Vector2 defaultSpawn = new Vector2(-5, 0);
+ 
     private Rigidbody2D player;
+
+    private int numLivesRemaining;
 
 	// Use this for initialization
 	void Start () {
+        numLivesRemaining = GameManager.instance.numLivesPerGame;
         player = GetComponent<Rigidbody2D>();
 	}
 	
@@ -18,8 +22,23 @@ public class PlayerData : MonoBehaviour {
 	}
 
     public void respawnShip() {
-        transform.position = defaultSpawn;
-        player.velocity = Vector3.zero;
-        player.angularVelocity = 0;
+        numLivesRemaining--;
+        if (numLivesRemaining == 0)
+        {
+            Debug.Log(player.name+": YOU DEAD SON");
+            transform.position = new Vector2(1000, 1000);
+        }
+        else if (numLivesRemaining > 0)
+        {
+            transform.position = defaultSpawn;
+            player.velocity = Vector3.zero;
+            player.angularVelocity = 0;
+            Debug.Log(player.name + " lives remaining: " + numLivesRemaining);
+        }
+    }
+
+    public bool playerIsAlive()
+    {
+        return numLivesRemaining > 0;
     }
 }

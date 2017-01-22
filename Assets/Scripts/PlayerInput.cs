@@ -35,7 +35,6 @@ public class PlayerInput : MonoBehaviour {
     {
         if (collider.gameObject.tag == "GravityWell")
         {
-            Debug.Log("COLLISION");
             GetComponent<PlayerData>().respawnShip();
         }
     }
