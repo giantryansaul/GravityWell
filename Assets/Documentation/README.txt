@@ -1,7 +1,7 @@
 ***Gravity Well README***
 
 --REQUIREMENTS--
-- Latest version of your favorite Internet browser
+- Mac or Windows Operating System
 - Functioning keyboard
 
 
