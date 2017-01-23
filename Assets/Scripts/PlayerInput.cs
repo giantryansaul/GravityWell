@@ -55,7 +55,7 @@ public class PlayerInput : MonoBehaviour {
 
     private void fireWave()
     {
-        if (timeTillNextWave == 0)
+        if (timeTillNextWave == 0 && _playerController.GetComponent<SpriteRenderer>().enabled)
         {
             GravityWave gw = _playerController.gameObject.AddComponent<GravityWave>();
             gw.playerSource = _playerController;
