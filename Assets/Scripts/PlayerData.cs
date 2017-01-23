@@ -13,7 +13,7 @@ public class PlayerData : MonoBehaviour {
  
     private Rigidbody2D player;
 
-    private int numLivesRemaining;
+    public int numLivesRemaining;
 
 	private Quaternion initialRotation;
 
@@ -34,7 +34,7 @@ public class PlayerData : MonoBehaviour {
 
     public void playerDied() {
         numLivesRemaining--;
-		livesText.text = numLivesRemaining.ToString();
+        triggerLivesCounterUpdate();
 
         ExplosionWave ew = player.gameObject.AddComponent<ExplosionWave>();
         ew.playerSource = player;
@@ -51,15 +51,20 @@ public class PlayerData : MonoBehaviour {
         }
     }
 
+    public void triggerLivesCounterUpdate()
+    {
+        livesText.text = numLivesRemaining.ToString();
+    }
+
     private IEnumerator hideAndWaitAndRespawn()
     {
         yield return new WaitForSecondsRealtime(GameManager.instance.repsawnTimeInSeconds);
-        player.GetComponent<SpriteRenderer>().enabled = true;
         respawnShip();
     }
 
     public void respawnShip()
     {
+        player.GetComponent<SpriteRenderer>().enabled = true;
         transform.position = defaultSpawn;
         player.velocity = Vector3.zero;
         player.angularVelocity = 0;
