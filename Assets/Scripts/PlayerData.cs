@@ -35,24 +35,36 @@ public class PlayerData : MonoBehaviour {
     public void respawnShip() {
         numLivesRemaining--;
 		livesText.text = numLivesRemaining.ToString();
+
+        ExplosionWave ew = player.gameObject.AddComponent<ExplosionWave>();
+        ew.playerSource = player;
+
+        player.GetComponent<SpriteRenderer>().enabled = false;
+
         if (numLivesRemaining == 0)
         {
 			GameManager.instance.GameOver (this);
         }
         else if (numLivesRemaining > 0)
 		{
-			transform.position = defaultSpawn;
-            player.velocity = Vector3.zero;
-            player.angularVelocity = 0;
-			player.transform.rotation = initialRotation;
-            giveInitialVelocity();
-//			yield return new WaitForSeconds(5);
+            StartCoroutine(hideAndWaitAndRespawn());
         }
+    }
+
+    private IEnumerator hideAndWaitAndRespawn()
+    {
+        yield return new WaitForSecondsRealtime(GameManager.instance.repsawnTimeInSeconds);
+        player.GetComponent<SpriteRenderer>().enabled = true;
+        transform.position = defaultSpawn;
+        player.velocity = Vector3.zero;
+        player.angularVelocity = 0;
+        player.transform.rotation = initialRotation;
+        giveInitialVelocity();
     }
 
     public void giveInitialVelocity()
     {
-        GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, 1) * 200);
+        player.AddRelativeForce(new Vector2(0, 1) * 200);
     }
 
     public bool playerIsAlive()

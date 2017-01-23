@@ -7,9 +7,8 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 
-//	public bool pause;
-
     public int numLivesPerGame = 5;
+    public int repsawnTimeInSeconds = 1; 
 
 	public Text gameOverText;
 

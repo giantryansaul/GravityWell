@@ -38,16 +38,14 @@ public class PlayerInput : MonoBehaviour {
         _playerController.MoveRotation(_playerController.rotation - getTurnAxis() * turnSpeed);
         float axis = Input.GetAxisRaw(throttleControlAxis);
 
-		if (axis != 0) {
+		if (axis != 0 && _playerController.GetComponent<SpriteRenderer>().enabled) {
 			_playerController.AddRelativeForce (new Vector2 (0, thrustVelocity * axis));
 			eng.enabled = true;
 
 		} else {
 			eng.enabled = false;
 		}
-
-
-
+        
         if(Input.GetAxisRaw(fireWaveAxis) != 0)
         {
             fireWave();
@@ -78,7 +76,8 @@ public class PlayerInput : MonoBehaviour {
             //Move ship off screen
             //Play explosion
             //Wait some time
-            GetComponent<PlayerData>().respawnShip();
+            PlayerData data = GetComponent<PlayerData>();
+            data.respawnShip();
         }
     }
 

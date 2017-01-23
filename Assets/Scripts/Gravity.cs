@@ -27,8 +27,6 @@ public class Gravity : MonoBehaviour {
 		Vector2 gravityWell = orbitObject == null ? new Vector2 (0, 0) : new Vector2(orbitObject.position.x, orbitObject.position.y);
 		Vector2 playerPos = new Vector2 (_playerController.transform.position.x, _playerController.transform.position.y);
 		Vector2 gravity = gravityWell - playerPos;
-		_playerController.AddForce (gravity * gravityForce );//* Mathf.Max(5 - gravity.magnitude, 1)
-
-        //transform.RotateAround(Vector3.zero, Vector3.forward, 20 * Time.deltaTime);
+		_playerController.AddForce (gravity * gravityForce );
     }
 }
