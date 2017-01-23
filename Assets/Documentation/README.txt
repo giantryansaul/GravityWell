@@ -11,14 +11,14 @@ W - Move ship forward
 S - Move ship backward
 A - Rotate ship left
 D - Rotate ship right
-Left Alt - Trigger Gravity Wave
+Left Ctrl - Trigger Gravity Wave
 
 -Player 2-
 Up Arrow - Move ship forward
 Down Arrow - Move ship backward
 Left Arrow - Rotate ship left
 Right Arrow - Rotate ship right
-Right Control - Trigger Gravity Wave
+Right Ctrl - Trigger Gravity Wave
 
 
 --CREDITS--
