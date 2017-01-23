@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour {
 
-    public Text livesText;
+	public string playerDisplay;
+
+	public Text livesText;
 
     public Vector2 defaultSpawn = new Vector2(-5, 0);
  
@@ -13,13 +15,16 @@ public class PlayerData : MonoBehaviour {
 
     private int numLivesRemaining;
 
+	private Quaternion initialRotation;
+
 	// Use this for initialization
 	void Start () {
         numLivesRemaining = GameManager.instance.numLivesPerGame;
         player = GetComponent<Rigidbody2D>();
 
-        livesText = GetComponent<Text>();
-        livesText.text = numLivesRemaining;
+		initialRotation = player.transform.rotation;
+
+		livesText.text = numLivesRemaining.ToString();
 	}
 	
 	// Update is called once per frame
@@ -29,18 +34,19 @@ public class PlayerData : MonoBehaviour {
 
     public void respawnShip() {
         numLivesRemaining--;
+		livesText.text = numLivesRemaining.ToString();
         if (numLivesRemaining == 0)
         {
-            Debug.Log(player.name+": YOU DEAD SON");
-            transform.position = new Vector2(1000, 1000);
+			GameManager.instance.GameOver (this);
         }
         else if (numLivesRemaining > 0)
-        {
-            transform.position = defaultSpawn;
+		{
+			transform.position = defaultSpawn;
             player.velocity = Vector3.zero;
             player.angularVelocity = 0;
+			player.transform.rotation = initialRotation;
             giveInitialVelocity();
-            Debug.Log(player.name + " lives remaining: " + numLivesRemaining);
+//			yield return new WaitForSeconds(5);
         }
     }
 
