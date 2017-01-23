@@ -32,7 +32,7 @@ public class PlayerData : MonoBehaviour {
 		
 	}
 
-    public void respawnShip() {
+    public void playerDied() {
         numLivesRemaining--;
 		livesText.text = numLivesRemaining.ToString();
 
@@ -55,6 +55,11 @@ public class PlayerData : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(GameManager.instance.repsawnTimeInSeconds);
         player.GetComponent<SpriteRenderer>().enabled = true;
+        respawnShip();
+    }
+
+    public void respawnShip()
+    {
         transform.position = defaultSpawn;
         player.velocity = Vector3.zero;
         player.angularVelocity = 0;

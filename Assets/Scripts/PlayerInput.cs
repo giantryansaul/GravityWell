@@ -73,11 +73,8 @@ public class PlayerInput : MonoBehaviour {
     {
         if (collider.gameObject.tag == "GravityWell")
         {
-            //Move ship off screen
-            //Play explosion
-            //Wait some time
             PlayerData data = GetComponent<PlayerData>();
-            data.respawnShip();
+            data.playerDied();
         }
     }
 
