@@ -6,6 +6,10 @@
 
 
 --GAMEPLAY INSTRUCTIONS--
+
+2 player local multiplayer game.
+Push the other ship into the center gravity well. The last player with remaining lives wins!
+
 -Player 1-
 W - Move ship forward
 S - Move ship backward
