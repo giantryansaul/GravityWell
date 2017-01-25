@@ -5,7 +5,7 @@ using UnityEngine;
 public class InverseEdgeCollider : MonoBehaviour
 {
 
-    public int NumEdges = 1000;
+    public int NumEdges = 3000;
 
     // Use this for initialization
     void Start()
